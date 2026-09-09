@@ -8137,3 +8137,543 @@ textarea {
     -webkit-user-select: text;
     user-select: text;
 } 
+
+/* =========================================
+   FINAL PAGE 3 SCROLL HINT
+========================================= */
+
+#finalScrollHint2026 {
+    position: fixed !important;
+
+    left: 50% !important;
+    bottom: 22px !important;
+
+    transform:
+        translateX(-50%) !important;
+
+    z-index: 2147483647 !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    gap: 5px !important;
+
+    opacity: 1 !important;
+    visibility: visible !important;
+
+    pointer-events: none !important;
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease,
+        visibility 0.3s ease !important;
+}
+
+
+#finalScrollHint2026 .final-scroll-label {
+    color:
+        rgba(255,255,255,0.75) !important;
+
+    font-family:
+        "Manrope",
+        sans-serif !important;
+
+    font-size: 8px !important;
+    font-weight: 700 !important;
+
+    letter-spacing:
+        2.6px !important;
+}
+
+
+#finalScrollHint2026 .final-scroll-icon {
+    width: 40px !important;
+    height: 40px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    border-radius: 50% !important;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.27) !important;
+
+    background:
+        rgba(255,160,210,0.18) !important;
+
+    color:
+        #ffc5e3 !important;
+
+    font-size: 22px !important;
+
+    box-shadow:
+        0 8px 24px
+        rgba(20,0,30,0.24) !important;
+
+    animation:
+        finalScrollBounce2026
+        1.4s
+        ease-in-out
+        infinite !important;
+}
+
+
+@keyframes finalScrollBounce2026 {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(7px);
+    }
+}
+
+
+#finalScrollHint2026.final-scroll-hidden {
+    opacity: 0 !important;
+
+    visibility: hidden !important;
+
+    transform:
+        translateX(-50%)
+        translateY(10px) !important;
+}
+
+
+@media (max-width: 700px) {
+
+    #finalScrollHint2026 {
+        bottom: 16px !important;
+    }
+
+    #finalScrollHint2026 .final-scroll-icon {
+        width: 36px !important;
+        height: 36px !important;
+
+        font-size: 20px !important;
+    }
+} 
+
+
+/* =========================================
+   HIDE OLD SCROLL INDICATORS
+========================================= */
+
+#scrollIndicator,
+#pageScrollCue,
+#pageDownHint,
+.scroll-indicator {
+    display: none !important;
+}
+
+
+/* Keep only the final indicator */
+
+#finalScrollHint2026 {
+    display: flex !important;
+} 
+
+/* =========================================
+   FINAL MOBILE SCROLL HINT FIX
+========================================= */
+
+@media (max-width: 700px) {
+
+    body.memories-body {
+        transform: none !important;
+        perspective: none !important;
+    }
+
+    #finalScrollHint2026 {
+        position: fixed !important;
+
+        left: 50% !important;
+        right: auto !important;
+
+        top: auto !important;
+        bottom: calc(18px + env(safe-area-inset-bottom)) !important;
+
+        transform: translate3d(-50%, 0, 0) !important;
+
+        width: 70px !important;
+        height: auto !important;
+
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+
+        gap: 5px !important;
+
+        opacity: 1 !important;
+        visibility: visible !important;
+
+        z-index: 2147483647 !important;
+
+        pointer-events: none !important;
+    }
+
+    #finalScrollHint2026 .final-scroll-label {
+        display: block !important;
+
+        color: rgba(255,255,255,.78) !important;
+
+        font-size: 8px !important;
+        font-weight: 700 !important;
+
+        letter-spacing: 2.4px !important;
+    }
+
+    #finalScrollHint2026 .final-scroll-icon {
+        width: 38px !important;
+        height: 38px !important;
+
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+
+        border-radius: 50% !important;
+
+        background: rgba(255,165,210,.24) !important;
+
+        border:
+            1px solid rgba(255,255,255,.32) !important;
+
+        color: #ffd0e8 !important;
+
+        font-size: 21px !important;
+
+        animation:
+            finalMobileScrollBounce
+            1.4s
+            ease-in-out
+            infinite !important;
+    }
+
+    @keyframes finalMobileScrollBounce {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(7px);
+        }
+    }
+
+
+    /* Hide only after actual scrolling */
+
+    #finalScrollHint2026.final-scroll-hidden {
+        opacity: 0 !important;
+        visibility: hidden !important;
+
+        transform:
+            translate3d(-50%, 10px, 0) !important;
+    }
+} 
+
+/* =========================================
+   FORCE FINAL SCROLL BUTTON ON MOBILE
+========================================= */
+
+#finalScrollHint2026 {
+    position: fixed !important;
+
+    left: 50% !important;
+    right: auto !important;
+
+    bottom: 18px !important;
+    top: auto !important;
+
+    transform: translateX(-50%) !important;
+
+    z-index: 2147483647 !important;
+
+    width: 74px !important;
+    height: 58px !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    opacity: 1 !important;
+    visibility: visible !important;
+
+    pointer-events: none !important;
+}
+
+
+#finalScrollHint2026 .final-scroll-label {
+    display: block !important;
+
+    margin-bottom: 4px !important;
+
+    color: rgba(255,255,255,.85) !important;
+
+    font-family: "Manrope", sans-serif !important;
+
+    font-size: 8px !important;
+    font-weight: 700 !important;
+
+    letter-spacing: 2.4px !important;
+}
+
+
+#finalScrollHint2026 .final-scroll-icon {
+    width: 38px !important;
+    height: 38px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    flex-shrink: 0 !important;
+
+    border-radius: 50% !important;
+
+    background: rgba(255, 157, 207, .30) !important;
+
+    border:
+        1px solid
+        rgba(255,255,255,.40) !important;
+
+    color: #ffd2e8 !important;
+
+    font-size: 21px !important;
+
+    box-shadow:
+        0 8px 20px
+        rgba(15,0,25,.30) !important;
+
+    animation:
+        finalScrollArrowMove
+        1.35s
+        ease-in-out
+        infinite !important;
+}
+
+
+@keyframes finalScrollArrowMove {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(6px);
+    }
+}
+
+
+#finalScrollHint2026.final-scroll-hidden {
+    opacity: 0 !important;
+    visibility: hidden !important;
+
+    transform:
+        translateX(-50%)
+        translateY(12px) !important;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    html,
+    body.memories-body {
+        transform: none !important;
+        overflow-x: hidden !important;
+    }
+
+
+    #finalScrollHint2026 {
+        position: fixed !important;
+
+        left: 50% !important;
+
+        bottom:
+            calc(
+                14px +
+                env(safe-area-inset-bottom)
+            ) !important;
+
+        transform:
+            translateX(-50%) !important;
+
+        z-index:
+            2147483647 !important;
+
+        display:
+            flex !important;
+    }
+} 
+
+/* =========================================
+   MOBILE PERFORMANCE + SMOOTH SCROLL
+========================================= */
+
+@media (max-width: 700px) {
+
+    html {
+        overflow-x: hidden !important;
+    }
+
+
+    body.memories-body {
+        width: 100% !important;
+
+        height: auto !important;
+        min-height: 100dvh !important;
+
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+
+        overscroll-behavior-y: auto !important;
+
+        touch-action: pan-y !important;
+
+        -webkit-overflow-scrolling: touch !important;
+    }
+
+
+    .memories-page,
+    .memories-container,
+    .photo-gallery {
+        height: auto !important;
+
+        overflow: visible !important;
+    }
+
+
+    /* Heavy fixed background glows */
+    .memory-glow {
+        display: none !important;
+    }
+
+
+    /* GPU-heavy glass blur off on phone */
+    .memory-card,
+    .ending-card {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+
+        filter: none !important;
+
+        box-shadow:
+            0 8px 22px
+            rgba(15, 0, 25, 0.16) !important;
+    }
+
+
+    /* Browser can skip rendering cards far below screen */
+    .memory-card {
+        content-visibility: auto;
+
+        contain-intrinsic-size:
+            auto 620px;
+    }
+
+
+    /* Images stay lightweight while scrolling */
+    .memory-photo img {
+        display: block !important;
+
+        width: 100% !important;
+        height: auto !important;
+
+        max-height: none !important;
+
+        object-fit: contain !important;
+
+        backface-visibility: hidden;
+    }
+
+
+    /* Don't let cinematic overlays intercept touch */
+    .cinematic-transition,
+    .page-one-cinematic {
+        pointer-events: none !important;
+
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+
+
+    /* Scroll indicator itself stays lightweight */
+    #finalScrollHint2026 .final-scroll-icon {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+} 
+
+/* =========================================
+   FINAL MOBILE PERFORMANCE FIX
+========================================= */
+
+@media (max-width: 700px) {
+
+    /* Heavy background glows */
+    .memory-glow {
+        display: none !important;
+    }
+
+    /* Expensive glass blur */
+    .memory-card,
+    .ending-card,
+    .wish-card,
+    .page-one-cinematic,
+    .cinematic-transition {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+
+    /* Reduce heavy shadows */
+    .memory-card,
+    .ending-card {
+        box-shadow:
+            0 6px 18px
+            rgba(15, 0, 25, 0.14) !important;
+    }
+
+    /* Native mobile scrolling */
+    body {
+        touch-action: pan-y !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+
+    body.memories-body {
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+    }
+
+    .memories-page,
+    .memories-container,
+    .photo-gallery {
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    /* Keep photos simple for mobile GPU */
+    .memory-photo img {
+        width: 100% !important;
+        height: auto !important;
+
+        object-fit: contain !important;
+
+        transform: none !important;
+        filter: none !important;
+    }
+} 
+

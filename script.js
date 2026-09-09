@@ -1,73 +1,186 @@
 // =========================================
-// BACKGROUND MUSIC - ALL PAGES
+// FINAL BACKGROUND MUSIC - ALL PAGES
 // =========================================
 
-const backgroundMusic = new Audio(
-    "assets/audio/Magic-Valentines-.mp3"
-);
+const MUSIC_FILE =
+    "assets/audio/Magic-Valentines-.mp3";
+
+const MUSIC_VOLUME = 0.30;
+
+const backgroundMusic =
+    new Audio(MUSIC_FILE);
 
 backgroundMusic.loop = true;
-backgroundMusic.volume = 0.30;
 backgroundMusic.preload = "auto";
 
-
-// Old mute setting no longer needed
-sessionStorage.removeItem(
-    "birthdayMusicMuted"
-);
+let musicRestored = false;
 
 
-// Restore previous music position
-const savedMusicTime =
-    sessionStorage.getItem(
-        "birthdayMusicTime"
-    );
+// -----------------------------------------
+// SAVE CURRENT MUSIC STATE
+// -----------------------------------------
 
+function saveMusicState() {
 
-backgroundMusic.addEventListener(
-    "loadedmetadata",
-    () => {
+    if (
+        Number.isFinite(
+            backgroundMusic.currentTime
+        )
+    ) {
 
-        if (!savedMusicTime) return;
+        sessionStorage.setItem(
+            "birthdayMusicTime",
+            backgroundMusic.currentTime
+        );
 
-        const savedTime =
-            Number(savedMusicTime);
-
-        if (
-            !Number.isNaN(savedTime) &&
-            savedTime >= 0 &&
-            savedTime < backgroundMusic.duration
-        ) {
-            backgroundMusic.currentTime =
-                savedTime;
-        }
+        sessionStorage.setItem(
+            "birthdayMusicSavedAt",
+            Date.now()
+        );
     }
-);
-
-
-// Start background music
-function startBackgroundMusic() {
-
-    backgroundMusic
-        .play()
-        .catch(() => {
-
-            // Some browsers block unmuted autoplay.
-            // First user interaction will start it automatically.
-
-        });
 }
 
 
-// Try to start immediately when website opens
+// -----------------------------------------
+// RESTORE MUSIC POSITION
+// -----------------------------------------
+
+function restoreMusicState() {
+
+    if (musicRestored) return;
+
+    musicRestored = true;
+
+
+    const savedTime =
+        Number(
+            sessionStorage.getItem(
+                "birthdayMusicTime"
+            )
+        );
+
+
+    const savedAt =
+        Number(
+            sessionStorage.getItem(
+                "birthdayMusicSavedAt"
+            )
+        );
+
+
+    if (
+        !Number.isFinite(savedTime) ||
+        savedTime < 0
+    ) {
+        return;
+    }
+
+
+    // Add the short time spent loading
+    // the next HTML page.
+    let elapsed = 0;
+
+    if (
+        Number.isFinite(savedAt) &&
+        savedAt > 0
+    ) {
+
+        elapsed =
+            Math.max(
+                0,
+                (Date.now() - savedAt) / 1000
+            );
+    }
+
+
+    let targetTime =
+        savedTime + elapsed;
+
+
+    if (
+        Number.isFinite(
+            backgroundMusic.duration
+        ) &&
+        backgroundMusic.duration > 0
+    ) {
+
+        targetTime =
+            targetTime %
+            backgroundMusic.duration;
+    }
+
+
+    try {
+
+        backgroundMusic.currentTime =
+            targetTime;
+
+    } catch (error) {
+
+        // Browser will retry after metadata loads.
+    }
+}
+
+
+// -----------------------------------------
+// START MUSIC
+// -----------------------------------------
+
+async function startBackgroundMusic() {
+
+    if (!musicRestored) {
+
+        restoreMusicState();
+    }
+
+
+    try {
+
+        await backgroundMusic.play();
+
+    } catch (error) {
+
+        // Browser blocked autoplay.
+        // First user interaction will unlock it.
+    }
+}
+
+
+// -----------------------------------------
+// RESTORE AFTER AUDIO METADATA IS READY
+// -----------------------------------------
+
+if (
+    backgroundMusic.readyState >= 1
+) {
+
+    restoreMusicState();
+
+} else {
+
+    backgroundMusic.addEventListener(
+        "loadedmetadata",
+        restoreMusicState,
+        { once: true }
+    );
+}
+
+
+// -----------------------------------------
+// TRY AUTOPLAY
+// -----------------------------------------
+
 startBackgroundMusic();
 
 
-// If browser blocks autoplay,
-// first click/tap anywhere will start it automatically
+// -----------------------------------------
+// AUTOPLAY FALLBACK
+// -----------------------------------------
+
 function unlockBackgroundMusic() {
 
     startBackgroundMusic();
+
 
     document.removeEventListener(
         "pointerdown",
@@ -83,7 +196,8 @@ function unlockBackgroundMusic() {
 
 document.addEventListener(
     "pointerdown",
-    unlockBackgroundMusic
+    unlockBackgroundMusic,
+    { passive: true }
 );
 
 
@@ -93,31 +207,40 @@ document.addEventListener(
 );
 
 
-// Save music position continuously
-setInterval(() => {
+// -----------------------------------------
+// SAVE POSITION PERIODICALLY
+// -----------------------------------------
 
-    if (!backgroundMusic.paused) {
-
-        sessionStorage.setItem(
-            "birthdayMusicTime",
-            backgroundMusic.currentTime
-        );
-    }
-
-}, 300);
+setInterval(
+    saveMusicState,
+    1500
+);
 
 
-// Save position when changing pages
+// -----------------------------------------
+// SAVE BEFORE LEAVING PAGE
+// -----------------------------------------
+
 window.addEventListener(
     "pagehide",
+    saveMusicState
+);
+
+
+document.addEventListener(
+    "visibilitychange",
     () => {
 
-        sessionStorage.setItem(
-            "birthdayMusicTime",
-            backgroundMusic.currentTime
-        );
+        if (
+            document.visibilityState ===
+            "hidden"
+        ) {
+
+            saveMusicState();
+        }
     }
 ); 
+
 
 // =========================================
 // PAGE 1 - CUT THE CAKE
@@ -905,3 +1028,67 @@ window.addEventListener("pageshow", (event) => {
         window.location.reload();
     }
 }); 
+
+// =========================================
+// FINAL PAGE 3 SCROLL HINT - OPTIMIZED
+// =========================================
+
+const finalScrollHint2026 =
+    document.getElementById(
+        "finalScrollHint2026"
+    );
+
+if (finalScrollHint2026) {
+
+    let scrollTicking = false;
+
+    function updateFinalScrollHint() {
+
+        const scrollPosition =
+            window.scrollY ||
+            document.documentElement.scrollTop ||
+            0;
+
+        if (scrollPosition > 100) {
+
+            finalScrollHint2026.classList.add(
+                "final-scroll-hidden"
+            );
+
+        } else {
+
+            finalScrollHint2026.classList.remove(
+                "final-scroll-hidden"
+            );
+        }
+
+        scrollTicking = false;
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        () => {
+
+            if (!scrollTicking) {
+
+                requestAnimationFrame(
+                    updateFinalScrollHint
+                );
+
+                scrollTicking = true;
+            }
+
+        },
+        { passive: true }
+    );
+
+
+    window.addEventListener(
+        "pageshow",
+        updateFinalScrollHint
+    );
+
+
+    updateFinalScrollHint();
+} 
