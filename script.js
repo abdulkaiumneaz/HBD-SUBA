@@ -533,7 +533,7 @@ if (document.body.classList.contains("memories-body")) {
     const scrollArrow =
         scrollIndicator.querySelector(
             ".scroll-arrow"
-        );
+        ); 
 
 
     // -----------------------------------------
