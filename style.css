@@ -8104,3 +8104,36 @@ body.memories-body .memory-glow {
         -webkit-overflow-scrolling: touch;
     }
 } 
+
+/* =========================================
+   DISABLE TEXT SELECTION / COPY HIGHLIGHT
+========================================= */
+
+html,
+body,
+body * {
+    -webkit-user-select: none;
+    user-select: none;
+
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/* Keep buttons clickable normally */
+
+button,
+a {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+
+/* If you ever add input fields later,
+   text selection will still work there */
+
+input,
+textarea {
+    -webkit-user-select: text;
+    user-select: text;
+} 
